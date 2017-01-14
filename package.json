@@ -1,0 +1,38 @@
+{
+  "name": "papper-scnr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --progress --display-error-details --config front-end/webpack/common.config.js --watch",
+    "prod": "webpack --progress --config webpack/common.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k1slim/papper-scnr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/k1slim/papper-scnr/issues"
+  },
+  "homepage": "https://github.com/k1slim/papper-scnr#readme",
+  "dependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-es2015": "^6.18.0",
+    "clean-webpack-plugin": "^0.1.15",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.26.0",
+    "redux": "^3.6.0",
+    "revue": "^3.0.0",
+    "sass-loader": "^4.1.1",
+    "socket.io": "^1.7.2",
+    "style-loader": "^0.13.1",
+    "vue": "^2.1.8",
+    "webpack": "^1.14.0",
+    "webpack-merge": "^2.4.0"
+  }
+}
