@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import 'views/enter';
-import 'views/camera';
-import 'views/monitor';
+import EnterView from 'views/enter';
+import CameraView from 'views/camera';
+import MonitorView from 'views/monitor';
 import store from './store';
 import './style/main.scss'
 
