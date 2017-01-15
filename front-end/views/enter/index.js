@@ -20,12 +20,16 @@ export default Vue.component('enterView', {
     template: `
         <div class="enter-view">
             <div class="enter-view-block" v-if="!data.cameraDevice">
-                <div>Monitor device</div>
-                <input type="text" placeholder="Type code" @keypress.enter="submitKey"/>
+                <h2 class="enter-view-title">
+                    Monitor device
+                </h2>
+                <input type="text" placeholder="Type code here" @keypress.enter="submitKey"/>
             </div>
             <div class="enter-view-block" v-if="data.cameraDevice">
-                <div>Camera device</div>
-                {{data.connectKey}}
+                <h2 class="enter-view-title">
+                    Camera device
+                </h2>
+                <h2 class="connect-key">{{data.connectKey}}</h2>
             </div>
             <button @click="changeTypeOfDevice">Change device type</button>
         </div>

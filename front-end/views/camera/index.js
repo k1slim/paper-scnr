@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import './camera.scss';
 
 export default Vue.component('cameraView', {
     mounted() {
@@ -9,7 +10,7 @@ export default Vue.component('cameraView', {
             video: true
         })
             .then(stream => {
-                window.stream = stream;
+                // window.stream = stream;
                 video.srcObject = stream;
             })
             .catch(error => {

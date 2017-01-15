@@ -1,0 +1,57 @@
+@import "./variable";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Roboto:300,400,500');
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: $primary-text-color;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-size: 1.8em;
+}
+
+button {
+  border: 1px solid $primary-color;
+  border-radius: 2px;
+  outline: none;
+  background: none;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  font-family: "Open Sans", sans-serif;
+  color: $secondary-text-color;
+  cursor: pointer;
+  &:hover {
+    border-color: $dark-primary-color;
+    color: $primary-text-color;
+  }
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid $primary-color;
+  outline: none;
+  padding: 10px;
+  font-family: "Open Sans", sans-serif;
+  &:focus {
+    border-bottom: 2px solid $dark-primary-color;
+  }
+}
+
+header {
+  border-top: 8px solid $dark-primary-color;
+  padding: 20px 40px;
+  background: $primary-color;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+  color: $accent-text-color;
+}
+
+.content {
+  margin: 40px;
+}

@@ -69,13 +69,7 @@ const common = {
                 loader: 'style!css!'
             }
         ]
-    },
-
-
-    // sassLoader: {
-    //     data: `@import "${__dirname}/../src/styles/config/_variables.scss";`
-    // },
-
+    }
 };
 
 if (TARGET === 'dev' || !TARGET) {

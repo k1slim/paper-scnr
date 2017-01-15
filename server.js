@@ -10,17 +10,23 @@ let rooms = {};
 io.on('connection', function (socket) {
     let code = generateRoomCode();
     rooms[code] = true;
-    socket.join(code.toString());
+    socket.join(code.toString(), () => console.log('connected client rooms', socket.rooms));
     socket.emit('GENERATE_KEY', {connectKey: code});
-    console.log('client rooms', socket.rooms);
-
 
     socket.on('CONNECT_TO_ROOM', function (data) {
         if (rooms[parseInt(data.connectKey)]) {
-            socket.leave(code.toString());
-            socket.join(data.connectKey);
+
+            //Leave from the initially created room and join to the room by connect key
+            socket.leave(code.toString(), () => console.log('after leave', socket.rooms));
+            delete rooms[code];
+
+            socket.join(data.connectKey, () => console.log('after join', socket.rooms));
             io.to(data.connectKey).emit('CONNECT_SUCCESSFUL');
         }
+    });
+
+    socket.on('disconnect', function () {
+        delete rooms[code];
     });
 });
 

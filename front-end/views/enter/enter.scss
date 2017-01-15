@@ -1,6 +1,17 @@
+@import "./../../style/variable";
+
 .enter-view {
+  text-align: center;
+
   .enter-view-block {
-    text-align: center;
+    height: 200px;
+  }
+  .enter-view-title {
+    margin-bottom: 30px;
   }
 
+  .connect-key {
+    color: $dark-primary-color;
+    font-weight: 500;
+  }
 }
