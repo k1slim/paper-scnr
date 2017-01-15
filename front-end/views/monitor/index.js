@@ -1,5 +1,8 @@
 import Vue from 'vue';
 
 Vue.component('monitorView', {
-    template: `<`
+    template: `
+        <div>
+            <canvas></canvas>
+        </div>`
 });

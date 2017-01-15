@@ -25,6 +25,10 @@ io.on('connection', function (socket) {
         }
     });
 
+    socket.on('SEND_IMAGE_DATA', function (data) {
+        io.to(code.toString()).emit('SEND_IMAGE_DATA', data);
+    });
+
     socket.on('disconnect', function () {
         delete rooms[code];
     });

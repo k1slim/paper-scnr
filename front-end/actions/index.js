@@ -2,7 +2,8 @@ import {
     SET_KEY,
     TRYING_TO_CONNECT_TO_ROOM,
     CONNECT_SUCCESSFUL,
-    TOGGLE_DEVICE_TYPE
+    TOGGLE_DEVICE_TYPE,
+    SEND_IMAGE_DATA
 } from './../constants';
 
 export function setKey(connectKey) {
@@ -30,5 +31,12 @@ export function toggleDeviceType(cameraDevice) {
     return {
         type: TOGGLE_DEVICE_TYPE,
         payload: {cameraDevice}
+    };
+}
+
+export function sendImageData(imageData) {
+    return {
+        type: SEND_IMAGE_DATA,
+        payload: {imageData}
     };
 }
