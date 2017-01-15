@@ -2,7 +2,7 @@ import Vue from 'vue';
 
 export default Vue.component('cameraView', {
     mounted() {
-        const video = document.querySelector('video');
+        const video = this.$refs.video;
 
         navigator.mediaDevices.getUserMedia({
             audio: false,
@@ -18,7 +18,7 @@ export default Vue.component('cameraView', {
     },
     template: `
         <div class="video-view">
-            <video autoplay></video>
+            <video autoplay ref="video"></video>
         </div>
     `
 });

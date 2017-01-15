@@ -1,4 +1,9 @@
-import {SET_KEY, TRYING_TO_CONNECT_TO_ROOM, CONNECT_SUCCESSFUL} from './../constants';
+import {
+    SET_KEY,
+    TRYING_TO_CONNECT_TO_ROOM,
+    CONNECT_SUCCESSFUL,
+    TOGGLE_DEVICE_TYPE
+} from './../constants';
 
 export function setKey(connectKey) {
     return {
@@ -7,7 +12,7 @@ export function setKey(connectKey) {
     };
 }
 
-export function tryToConnectToRom(connectKey) {
+export function tryToConnectToRoom(connectKey) {
     return {
         type: TRYING_TO_CONNECT_TO_ROOM,
         payload: {connectKey}
@@ -18,5 +23,12 @@ export function setSuccessConnection() {
     return {
         type: CONNECT_SUCCESSFUL,
         payload: {connected: true}
+    };
+}
+
+export function toggleDeviceType(cameraDevice) {
+    return {
+        type: TOGGLE_DEVICE_TYPE,
+        payload: {cameraDevice}
     };
 }

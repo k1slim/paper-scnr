@@ -1,4 +1,5 @@
 import {setKey, setSuccessConnection} from './../actions';
+import {changeRoute} from './../actions/routerActions';
 import {TRYING_TO_CONNECT_TO_ROOM} from './../constants';
 import io from 'socket.io-client';
 
@@ -19,5 +20,14 @@ export default function (store) {
 
     socket.on('GENERATE_KEY', data => store.dispatch(setKey(data.connectKey)));
 
-    socket.on('CONNECT_SUCCESSFUL', data => store.dispatch(setSuccessConnection()));
+    socket.on('CONNECT_SUCCESSFUL', () => {
+            if (store.store.getState().main.cameraDevice) {
+                store.dispatch(changeRoute('#camera'));
+            }
+            else {
+                store.dispatch(changeRoute('#monitor'));
+            }
+            store.dispatch(setSuccessConnection());
+        }
+    );
 }

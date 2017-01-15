@@ -1,9 +1,10 @@
 import {createReducer} from './';
-import {SET_KEY, CONNECT_SUCCESSFUL} from './../constants';
+import {SET_KEY, CONNECT_SUCCESSFUL, TOGGLE_DEVICE_TYPE} from './../constants';
 
 const initialState = {
     connectKey: '',
-    connected: false
+    connected: false,
+    cameraDevice: window.innerWidth < '1000'
 };
 
 export default createReducer(initialState, {
@@ -11,6 +12,9 @@ export default createReducer(initialState, {
         return Object.assign(state, payload);
     },
     [CONNECT_SUCCESSFUL]: (state, payload) => {
+        return Object.assign(state, payload);
+    },
+    [TOGGLE_DEVICE_TYPE]: (state, payload) => {
         return Object.assign(state, payload);
     }
 });

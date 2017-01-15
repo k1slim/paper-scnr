@@ -15,5 +15,5 @@ export default store;
 
 const ENV = process.env.NODE_ENV;
 if (ENV === 'development') {
-    window.thisStore = store;
+    window.thisStore = store.store.getState();
 }
