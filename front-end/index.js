@@ -2,6 +2,7 @@ import Vue from 'vue';
 import EnterView from 'views/enter';
 import CameraView from 'views/camera';
 import MonitorView from 'views/monitor';
+import ScanView from 'views/scan';
 import store from './store';
 import './style/main.scss'
 
@@ -9,11 +10,13 @@ const NotFound = {template: '<p>Page not found</p>'};
 const Home = {template: '<enter-view/>'};
 const Camera = {template: '<camera-view/>'};
 const Monitor = {template: '<monitor-view/>'};
+const Scan = {template: '<scan-view/>'};
 
 const routes = {
     '': Home,
     '#camera': Camera,
-    '#monitor': Monitor
+    '#monitor': Monitor,
+    '#scan': Scan
 };
 
 new Vue({

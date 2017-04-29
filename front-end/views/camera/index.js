@@ -2,6 +2,7 @@ import Vue from 'vue';
 import './camera.scss';
 import store from './../../store';
 import {sendImageData} from './../../actions';
+import {getUserMediaWrapper, getProjectedImageFromCanvas} from './../../utils';
 
 const OPTIONS = {
     width: 320,
@@ -22,7 +23,7 @@ export default Vue.component('cameraView', {
         getUserMediaWrapper(video)
             .then(() => {
                 setInterval(() => {
-                    store.dispatch(sendImageData(getProjectedImageFromCanvas(canvasContext, video).width));
+                    store.dispatch(sendImageData(getProjectedImageFromCanvas(canvasContext, video, OPTIONS).width));
                 }, 5000);
             })
             .catch(error => {
@@ -38,18 +39,3 @@ export default Vue.component('cameraView', {
         </div>
     `
 });
-
-function getUserMediaWrapper(video) {
-    return navigator.mediaDevices.getUserMedia({
-        audio: false,
-        video: true
-    })
-        .then(stream => {
-            video.srcObject = stream;
-        })
-}
-
-function getProjectedImageFromCanvas(canvas, video) {
-    canvas.drawImage(video, 0, 0, OPTIONS.width, OPTIONS.height);
-    return canvas.getImageData(0, 0, OPTIONS.width, OPTIONS.height);
-}

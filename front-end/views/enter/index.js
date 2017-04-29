@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import store from './../../store';
 import {tryToConnectToRoom, toggleDeviceType} from './../../actions';
+import {changeRoute} from './../../actions/routerActions';
 import './enter.scss';
 
 export default Vue.component('enterView', {
@@ -15,6 +16,9 @@ export default Vue.component('enterView', {
         },
         changeTypeOfDevice: function () {
             store.dispatch(toggleDeviceType(!this.data.cameraDevice));
+        },
+        goToScanView: function () {
+            store.dispatch(changeRoute('#scan'));
         }
     },
     template: `
@@ -32,6 +36,7 @@ export default Vue.component('enterView', {
                 <h2 class="connect-key">{{data.connectKey}}</h2>
             </div>
             <button @click="changeTypeOfDevice">Change device type</button>
+            <button @click="goToScanView">Go to scan view</button>
         </div>
     `
 });

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --progress --display-error-details --config front-end/webpack/common.config.js --watch",
-    "prod": "webpack --progress --config webpack/common.config.js"
+    "prod": "webpack --progress --config front-end/webpack/common.config.js"
   },
   "repository": {
     "type": "git",
