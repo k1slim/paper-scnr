@@ -48,7 +48,8 @@ export function matrixToImageData(matrix, context, options) {
 }
 
 export function detector(canvas, video, options) {
-    options.touchSensitivity = 140;
+    options.touchSensitivity = 50;
+    options.sensitivity = 150;
 
     let loopTimer = null;
 
@@ -60,19 +61,19 @@ export function detector(canvas, video, options) {
     };
 
     let buttons = [];
-    let readyToFind = false;
+    let readyToFind = true;
     let startTime = null;
 
     const nextFrame = function () {
         let imageData = getProjectedImageFromCanvas(canvas, video, options),
-            data = imageDataToMatrix(imageData, options, 135);
+            data = imageDataToMatrix(imageData, options, options.sensitivity);
 
         if (readyToFind) {
             if (!startTime) {
                 startTime = (new Date()).valueOf();
             }
             buttons = findShapes(data, buttons, options);
-            data = imageDataToMatrix(imageData, options, 135);
+            data = imageDataToMatrix(imageData, options, options.sensitivity);
             buttons = findStableButtons(data, buttons);
             let timeDiff = ((new Date()).valueOf() - startTime);
             if (timeDiff > 10000) {
@@ -80,7 +81,7 @@ export function detector(canvas, video, options) {
                 readyToFind = false;
             }
         }
-        data = imageDataToMatrix(imageData, options, 135);
+        data = imageDataToMatrix(imageData, options, options.sensitivity);
         findTouches(data, buttons);
 
         imageData = matrixToImageData(data, canvas, options);

@@ -1,6 +1,4 @@
 import Vue from 'vue';
-import store from './../../store';
-import {sendImageData} from './../../actions';
 import {
     getUserMediaWrapper,
     getProjectedImageFromCanvas,
@@ -23,12 +21,15 @@ export default Vue.component('scanView', {
         video.setAttribute('width', OPTIONS.width);
         video.setAttribute('height', OPTIONS.height);
 
+        const canvas = this.$refs.canvas;
+        canvas.width = OPTIONS.width;
+        canvas.height = OPTIONS.height;
+
+        const canvasFromImage = this.$refs.canvasFromImage;
+        canvasFromImage.width = OPTIONS.width;
+        canvasFromImage.height = OPTIONS.height;
+
         getUserMediaWrapper(video)
-            .then(() => {
-                // setInterval(() => {
-                //     store.dispatch(sendImageData(getProjectedImageFromCanvas(canvasContext, video, OPTIONS).width));
-                // }, 5000);
-            })
             .catch(error => {
                 console.warn('navigator.getUserMedia error: ', error);
             });
@@ -37,13 +38,8 @@ export default Vue.component('scanView', {
     methods: {
         drawToCanvas: function () {
             const video = this.$refs.video;
-            video.setAttribute('width', OPTIONS.width);
-            video.setAttribute('height', OPTIONS.height);
 
-            const canvas = this.$refs.canvas;
             const canvasContext = this.$refs.canvas.getContext('2d');
-            canvas.width = OPTIONS.width;
-            canvas.height = OPTIONS.height;
 
             getProjectedImageFromCanvas(canvasContext, video, OPTIONS);
         },
@@ -51,9 +47,6 @@ export default Vue.component('scanView', {
             const canvas = this.$refs.canvasFromImage;
             const context = canvas.getContext('2d');
             const img = this.$refs.image;
-
-            canvas.width = OPTIONS.width;
-            canvas.height = OPTIONS.height;
 
             const myData = getProjectedImageFromCanvas(context, img, OPTIONS);
 
@@ -63,13 +56,8 @@ export default Vue.component('scanView', {
         },
         getFromVideo: function () {
             const video = this.$refs.video;
-            video.setAttribute('width', OPTIONS.width);
-            video.setAttribute('height', OPTIONS.height);
 
-            const canvas = this.$refs.canvas;
             const canvasContext = this.$refs.canvas.getContext('2d');
-            canvas.width = OPTIONS.width;
-            canvas.height = OPTIONS.height;
 
             const myDetector = detector(canvasContext, video, Object.assign({}, OPTIONS, {videoURL: "./cid.mov"}));
 
@@ -86,18 +74,17 @@ export default Vue.component('scanView', {
     },
     template: `
         <div class="camera-view">
-        <div>
-            <video autoplay ref="video"></video>
-            <canvas ref="canvas"></canvas>
-            <button @click="drawToCanvas">Draw image from camera</button>
-            <button @click="getFromVideo">Draw video from video</button>
-        </div>
-        <div>
-            <img ref="image" src="./../../trimmed.jpg">
-            <canvas ref="canvasFromImage"></canvas>
-            <button @click="drawFromImageToCanvas">Draw image from image</button>
-        </div>
-
+            <div>
+                <video autoplay ref="video"></video>
+                <canvas ref="canvas"></canvas>
+                <button @click="drawToCanvas">Draw image from camera</button>
+                <button @click="getFromVideo">Draw video from video</button>
+            </div>
+            <div>
+                <img ref="image" src="./../../trimmed.jpg">
+                <canvas ref="canvasFromImage"></canvas>
+                <button @click="drawFromImageToCanvas">Draw image from image</button>
+            </div>
         </div>
     `
 });
