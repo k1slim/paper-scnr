@@ -2,7 +2,7 @@ import Vue from 'vue';
 import './camera.scss';
 import store from './../../store';
 import {sendImageData} from './../../actions';
-import {getUserMediaWrapper, getProjectedImageFromCanvas} from './../../utils';
+import {getUserMediaWrapper, detector} from './../../utils';
 
 const OPTIONS = {
     width: 320,
@@ -22,16 +22,24 @@ export default Vue.component('cameraView', {
 
         getUserMediaWrapper(video)
             .then(() => {
-                setInterval(() => {
-                    store.dispatch(sendImageData(getProjectedImageFromCanvas(canvasContext, video, OPTIONS).width));
-                }, 5000);
+                const myDetector = detector(canvasContext, video, OPTIONS);
+
+                myDetector.attachEvent("buttonDetected", function (button) {
+                    console.log("New button: ", button.id);
+                });
+                myDetector.attachEvent("touchStart", function (button) {
+                    store.dispatch(sendImageData(button.id));
+                    console.log("Touch start: ", button.id);
+                });
+                myDetector.attachEvent("touchEnd", function (button) {
+                    console.log("Touch end: ", button.id);
+                });
             })
             .catch(error => {
                 console.warn('navigator.getUserMedia error: ', error);
             });
 
     },
-    methods: {},
     template: `
         <div class="camera-view">
             <video autoplay ref="video"></video>
