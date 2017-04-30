@@ -2,6 +2,13 @@ export const SET_KEY = 'SET_KEY';
 export const TRYING_TO_CONNECT_TO_ROOM = 'TRYING_TO_CONNECT_TO_ROOM';
 export const CONNECT_SUCCESSFUL = 'CONNECT_SUCCESSFUL';
 export const TOGGLE_DEVICE_TYPE = 'TOGGLE_DEVICE_TYPE';
-export const SEND_IMAGE_DATA = 'SEND_IMAGE_DATA';
+
+export const DETECT_TOUCH = 'DETECT_TOUCH';
+export const TOUCH_END = 'TOUCH_END';
+export const SET_TOUCH = 'SET_TOUCH';
+export const REMOVE_TOUCH = 'REMOVE_TOUCH';
+
+export const DETECT_BUTTON = 'DETECT_BUTTON';
+export const SET_BUTTON = 'SET_BUTTON';
 
 export const CHANGE_ROUTE = 'CHANGE_ROUTE';

@@ -3,7 +3,12 @@ import {
     TRYING_TO_CONNECT_TO_ROOM,
     CONNECT_SUCCESSFUL,
     TOGGLE_DEVICE_TYPE,
-    SEND_IMAGE_DATA
+    DETECT_TOUCH,
+    DETECT_BUTTON,
+    TOUCH_END,
+    REMOVE_TOUCH,
+    SET_TOUCH,
+    SET_BUTTON
 } from './../constants';
 
 export function setKey(connectKey) {
@@ -34,9 +39,45 @@ export function toggleDeviceType(cameraDevice) {
     };
 }
 
-export function sendImageData(imageData) {
+export function detectTouch(touch) {
     return {
-        type: SEND_IMAGE_DATA,
-        payload: {imageData}
+        type: DETECT_TOUCH,
+        payload: {touch}
     };
 }
+
+export function touchEnd(touch) {
+    return {
+        type: TOUCH_END,
+        payload: {touch}
+    };
+}
+
+export function detectButton(button) {
+    return {
+        type: DETECT_BUTTON,
+        payload: button
+    };
+}
+
+export function setTouch(touch) {
+    return {
+        type: SET_TOUCH,
+        payload: touch
+    };
+}
+
+export function removeTouch(touch) {
+    return {
+        type: REMOVE_TOUCH,
+        payload: touch
+    };
+}
+
+export function setButton(button) {
+    return {
+        type: SET_BUTTON,
+        payload: button
+    };
+}
+

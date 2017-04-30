@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const development = require('./dev.config');
 const production = require('./prod.config');
@@ -46,7 +47,13 @@ const common = {
         new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
         new CleanWebpackPlugin([PATHS.build], {
             root: process.cwd()
-        })
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: 'front-end/media',
+                to: 'media'
+            },
+        ])
     ],
 
     resolve: {

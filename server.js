@@ -25,8 +25,16 @@ io.on('connection', function (socket) {
         }
     });
 
-    socket.on('SEND_IMAGE_DATA', function (data) {
-        io.to(code.toString()).emit('SEND_IMAGE_DATA', data);
+    socket.on('DETECT_BUTTON', function (data) {
+        io.to(code.toString()).emit('DETECT_BUTTON', data);
+    });
+
+    socket.on('DETECT_TOUCH', function (data) {
+        io.to(code.toString()).emit('DETECT_TOUCH', data);
+    });
+
+    socket.on('TOUCH_END', function (data) {
+        io.to(code.toString()).emit('TOUCH_END', data);
     });
 
     socket.on('disconnect', function () {

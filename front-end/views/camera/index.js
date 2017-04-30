@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import './camera.scss';
 import store from './../../store';
-import {sendImageData} from './../../actions';
+import {detectTouch, detectButton, touchEnd} from './../../actions';
 import {getUserMediaWrapper, detector} from './../../utils';
 
 const OPTIONS = {
@@ -20,24 +20,29 @@ export default Vue.component('cameraView', {
         canvas.width = OPTIONS.width;
         canvas.height = OPTIONS.height;
 
-        getUserMediaWrapper(video)
-            .then(() => {
-                const myDetector = detector(canvasContext, video, OPTIONS);
+        // getUserMediaWrapper(video)
+        //     .then(() => {
+                const myDetector = detector(canvasContext, video, Object.assign({}, OPTIONS, {videoURL: "./media/cid.mov"}));
 
                 myDetector.attachEvent("buttonDetected", function (button) {
-                    console.log("New button: ", button.id);
+                    store.dispatch(detectButton({
+                        id: button.id,
+                        coords: button.coords
+                    }));
+                    console.log("New button: ", button);
                 });
                 myDetector.attachEvent("touchStart", function (button) {
-                    store.dispatch(sendImageData(button.id));
+                    store.dispatch(detectTouch(button.id));
                     console.log("Touch start: ", button.id);
                 });
                 myDetector.attachEvent("touchEnd", function (button) {
+                    store.dispatch(touchEnd(button.id));
                     console.log("Touch end: ", button.id);
                 });
-            })
-            .catch(error => {
-                console.warn('navigator.getUserMedia error: ', error);
-            });
+            // })
+            // .catch(error => {
+            //     console.warn('navigator.getUserMedia error: ', error);
+            // });
 
     },
     template: `

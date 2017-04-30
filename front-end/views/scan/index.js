@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import './scan.scss';
 import {
     getUserMediaWrapper,
     getProjectedImageFromCanvas,
@@ -59,10 +60,10 @@ export default Vue.component('scanView', {
 
             const canvasContext = this.$refs.canvas.getContext('2d');
 
-            const myDetector = detector(canvasContext, video, Object.assign({}, OPTIONS, {videoURL: "./cid.mov"}));
+            const myDetector = detector(canvasContext, video, Object.assign({}, OPTIONS, {videoURL: "./media/cid.mov"}));
 
             myDetector.attachEvent("buttonDetected", function (button) {
-                console.log("New button: ", button.id);
+                console.log("New button: ", button);
             });
             myDetector.attachEvent("touchStart", function (button) {
                 console.log("Touch start: ", button.id);
@@ -73,16 +74,18 @@ export default Vue.component('scanView', {
         }
     },
     template: `
-        <div class="camera-view">
+        <div class="scan-view">
             <div>
-                <video autoplay ref="video"></video>
+                <video muted autoplay ref="video"></video>
                 <canvas ref="canvas"></canvas>
+                <br>
                 <button @click="drawToCanvas">Draw image from camera</button>
                 <button @click="getFromVideo">Draw video from video</button>
             </div>
             <div>
-                <img ref="image" src="./../../trimmed.jpg">
+                <img ref="image" src="./../../media/trimmed.jpg">
                 <canvas ref="canvasFromImage"></canvas>
+                <br>
                 <button @click="drawFromImageToCanvas">Draw image from image</button>
             </div>
         </div>
