@@ -12,7 +12,8 @@ const initialState = {
     connectKey: '',
     connected: false,
     cameraDevice: window.innerWidth < '1000',
-    touch: undefined
+    touch: undefined,
+    buttons: []
 };
 
 export default createReducer(initialState, {
@@ -32,7 +33,21 @@ export default createReducer(initialState, {
         return Object.assign(state, {touch: undefined});
     },
     [SET_BUTTON]: (state, payload) => {
-        //TODO implement adding button logic
-        return Object.assign(state);
+        let existingButtonIndex = -1;
+        const newButtons = state.buttons.slice(0);
+
+        state.buttons.forEach((button, index) => {
+            if (button.id === payload.id) {
+                existingButtonIndex = index;
+            }
+        });
+
+        if (existingButtonIndex !== -1) {
+            newButtons.splice(existingButtonIndex, 1, payload);
+        }
+        else {
+            newButtons.push(payload);
+        }
+        return Object.assign(state, {buttons: newButtons});
     }
 });

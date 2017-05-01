@@ -47,7 +47,7 @@ export default Vue.component('cameraView', {
     },
     template: `
         <div class="camera-view">
-            <video autoplay ref="video"></video>
+            <video autoplay ref="video" muted></video>
             <canvas ref="canvas"></canvas>
         </div>
     `
