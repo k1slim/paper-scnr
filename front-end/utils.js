@@ -49,7 +49,7 @@ export function matrixToImageData(matrix, context, options) {
 
 export function detector(canvas, video, options) {
     options.touchSensitivity = 50;
-    options.sensitivity = 150;
+    options.sensitivity = 120;
 
     let loopTimer = null;
 
@@ -76,12 +76,13 @@ export function detector(canvas, video, options) {
             data = imageDataToMatrix(imageData, options, options.sensitivity);
             buttons = findStableButtons(data, buttons);
             let timeDiff = ((new Date()).valueOf() - startTime);
-            if (timeDiff > 10000) {
+            if (timeDiff > 1000) {
                 startTime = null;
                 readyToFind = false;
             }
         }
         data = imageDataToMatrix(imageData, options, options.sensitivity);
+
         findTouches(data, buttons);
 
         imageData = matrixToImageData(data, canvas, options);

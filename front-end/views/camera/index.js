@@ -22,7 +22,7 @@ export default Vue.component('cameraView', {
 
         // getUserMediaWrapper(video)
         //     .then(() => {
-                const myDetector = detector(canvasContext, video, Object.assign({}, OPTIONS, {videoURL: "./media/cid.mov"}));
+                const myDetector = detector(canvasContext, video, Object.assign({}, OPTIONS, {videoURL: "./media/piano.mp4"}));
 
                 myDetector.attachEvent("buttonDetected", function (button) {
                     store.dispatch(detectButton({
