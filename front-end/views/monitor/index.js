@@ -5,8 +5,12 @@ const OPTIONS = {
     height: 240
 };
 
-let counterWidget;
-let pianoWidget;
+const widgets = {
+    counter,
+    piano
+};
+
+let widget;
 
 Vue.component('monitorView', {
     data() {
@@ -22,13 +26,11 @@ Vue.component('monitorView', {
         canvas.height = OPTIONS.height;
         this.drawButtons();
 
-        // counterWidget = counter(canvasContext, OPTIONS);
-        pianoWidget = piano();
+        widget = widgets['piano'](canvasContext, OPTIONS);
     },
     beforeUpdate: function () {
         this.drawButtons();
-        // counterWidget(this.data.touch);
-        pianoWidget(this.data.touch);
+        widget(this.data.touch);
     },
     methods: {
         drawButtons: function () {
@@ -50,17 +52,16 @@ Vue.component('monitorView', {
         </div>`
 });
 
-
 function counter(canvas, options) {
     let counter = 0;
 
-    let drawCounter = function () {
+    const drawCounter = function () {
         canvas.font = "20px Arial";
         canvas.fillStyle = "blue";
         canvas.fillText(counter.toString(), options.width / 2, options.height);
     };
 
-    let processTouch = function (touchID) {
+    const processTouch = function (touchID) {
         if (touchID === 1) {
             counter--;
         }
