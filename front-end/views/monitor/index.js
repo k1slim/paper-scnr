@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import vueSlider from 'vue-slider-component';
+import './monitor.scss';
 
 const OPTIONS = {
     width: 320,
@@ -13,9 +15,14 @@ const widgets = {
 let widget;
 
 Vue.component('monitorView', {
+    components: {
+        vueSlider
+    },
     data() {
         return {
-            data: this.$select('main')
+            data: this.$select('main'),
+            counterValue: 0,
+            widget: ''
         };
     },
     mounted: function () {
@@ -26,11 +33,16 @@ Vue.component('monitorView', {
         canvas.height = OPTIONS.height;
         this.drawButtons();
 
-        widget = widgets['piano'](canvasContext, OPTIONS);
+        const widgetType = 'piano';
+        widget = widgets[widgetType](canvasContext, OPTIONS);
+        this.widget = widgetType;
     },
-    beforeUpdate: function () {
-        this.drawButtons();
-        widget(this.data.touch);
+    watch: {
+        'data.touch' () {
+            this.drawButtons();
+            const counter = widget(this.data.touch);
+            this.setValue(counter);
+        }
     },
     methods: {
         drawButtons: function () {
@@ -41,14 +53,21 @@ Vue.component('monitorView', {
                 canvas.lineWidth = "2";
                 canvas.strokeStyle = button.id === this.data.touch ? "green" : "red";
                 canvas.rect(button.coords[0][1], button.coords[0][0], button.coords[1][1] - button.coords[0][1], button.coords[1][0] - button.coords[0][0]);
+                if (button.id === this.data.touch) {
+                    canvas.fillStyle = "green";
+                    canvas.fillRect(button.coords[0][1], button.coords[0][0], button.coords[1][1] - button.coords[0][1], button.coords[1][0] - button.coords[0][0]);
+                }
                 canvas.stroke();
             });
+        },
+        setValue: function (val) {
+            this.counterValue = val;
         }
     },
     template: `
         <div class="monitor-view">
             <canvas ref="canvas"></canvas>
-            {{ data.touch }}
+            <vue-slider v-if="widget === 'counter'" :min="-5" :max="5" v-model="counterValue"></vue-slider>
         </div>`
 });
 
@@ -73,6 +92,7 @@ function counter(canvas, options) {
     return function (touchID) {
         processTouch(touchID);
         drawCounter();
+        return counter;
     };
 }
 
@@ -83,7 +103,10 @@ function piano() {
         {noteName: 'c4', frequency: 261.6},
         {noteName: 'd4', frequency: 293.7},
         {noteName: 'e4', frequency: 329.6},
-        {noteName: 'f4', frequency: 349.2}
+        {noteName: 'f4', frequency: 349.2},
+        {noteName: 'g4', frequency: 392},
+        {noteName: 'a4', frequency: 440},
+        {noteName: 'b4', frequency: 493.9}
     ];
 
     function Sound(frequency) {

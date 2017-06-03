@@ -36,7 +36,15 @@ export default Vue.component('enterView', {
                 <h2 class="connect-key">{{data.connectKey}}</h2>
             </div>
             <button @click="changeTypeOfDevice">Change device type</button>
-            <button @click="goToScanView">Go to scan view</button>
+            <select class="widget-select">
+                <option selected>
+                    Counter
+                </option>
+                <option>
+                    Piano
+                </option>
+            </select>
+            <button style="display: none" @click="goToScanView">Go to scan view</button>
         </div>
     `
 });
