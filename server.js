@@ -21,7 +21,7 @@ io.on('connection', function (socket) {
             delete rooms[code];
 
             socket.join(data.connectKey, () => console.log('after join', socket.rooms));
-            io.to(data.connectKey).emit('CONNECT_SUCCESSFUL');
+            io.to(data.connectKey).emit('CONNECT_SUCCESSFUL', data.widget);
         }
     });
 

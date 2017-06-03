@@ -33,7 +33,7 @@ Vue.component('monitorView', {
         canvas.height = OPTIONS.height;
         this.drawButtons();
 
-        const widgetType = 'piano';
+        const widgetType = location.hash.split('=')[1];
         widget = widgets[widgetType](canvasContext, OPTIONS);
         this.widget = widgetType;
     },

@@ -61,12 +61,12 @@ export default function (store) {
         }
     });
 
-    socket.on('CONNECT_SUCCESSFUL', () => {
+    socket.on('CONNECT_SUCCESSFUL', (widget) => {
             if (store.store.getState().main.cameraDevice) {
                 store.dispatch(changeRoute('#camera'));
             }
             else {
-                store.dispatch(changeRoute('#monitor'));
+                store.dispatch(changeRoute(`#monitor?widget=${widget}`));
             }
             store.dispatch(setSuccessConnection());
         }

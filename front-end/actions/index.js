@@ -18,10 +18,10 @@ export function setKey(connectKey) {
     };
 }
 
-export function tryToConnectToRoom(connectKey) {
+export function tryToConnectToRoom({connectKey, widget}) {
     return {
         type: TRYING_TO_CONNECT_TO_ROOM,
-        payload: {connectKey}
+        payload: {connectKey, widget}
     };
 }
 

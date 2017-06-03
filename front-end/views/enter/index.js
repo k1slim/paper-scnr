@@ -7,12 +7,13 @@ import './enter.scss';
 export default Vue.component('enterView', {
     data() {
         return {
-            data: this.$select('main')
+            data: this.$select('main'),
+            widget: 'counter'
         };
     },
     methods: {
         submitKey: function (event) {
-            store.dispatch(tryToConnectToRoom(event.target.value));
+            store.dispatch(tryToConnectToRoom({connectKey: event.target.value, widget: this.widget}));
         },
         changeTypeOfDevice: function () {
             store.dispatch(toggleDeviceType(!this.data.cameraDevice));
@@ -36,11 +37,11 @@ export default Vue.component('enterView', {
                 <h2 class="connect-key">{{data.connectKey}}</h2>
             </div>
             <button @click="changeTypeOfDevice">Change device type</button>
-            <select class="widget-select">
-                <option selected>
+            <select v-if="!data.cameraDevice" v-model="widget" class="widget-select">
+                <option value="counter">
                     Counter
                 </option>
-                <option>
+                <option value="piano">
                     Piano
                 </option>
             </select>

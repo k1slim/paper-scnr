@@ -15,7 +15,8 @@ const Scan = {template: '<scan-view/>'};
 const routes = {
     '': Home,
     '#camera': Camera,
-    '#monitor': Monitor,
+    '#monitor?widget=piano': Monitor,
+    '#monitor?widget=counter': Monitor,
     '#scan': Scan
 };
 
