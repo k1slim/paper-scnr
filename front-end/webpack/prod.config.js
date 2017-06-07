@@ -20,10 +20,10 @@ module.exports = {
         new ExtractTextPlugin('styles/[name].[contenthash].css'),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false
+        //     }
+        // }),
     ],
 };

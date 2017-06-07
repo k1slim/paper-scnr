@@ -20,9 +20,9 @@ export default Vue.component('cameraView', {
         canvas.width = OPTIONS.width;
         canvas.height = OPTIONS.height;
 
-        // getUserMediaWrapper(video)
-        //     .then(() => {
-                const myDetector = detector(canvasContext, video, Object.assign({}, OPTIONS, {videoURL: "./media/piano.mp4"}));
+        getUserMediaWrapper(video)
+            .then(() => {
+                const myDetector = detector(canvasContext, video, Object.assign({}, OPTIONS, /*{videoURL: "./media/piano.mp4"}*/));
 
                 myDetector.attachEvent("buttonDetected", function (button) {
                     store.dispatch(detectButton({
@@ -39,10 +39,10 @@ export default Vue.component('cameraView', {
                     store.dispatch(touchEnd(button.id));
                     console.log("Touch end: ", button.id);
                 });
-            // })
-            // .catch(error => {
-            //     console.warn('navigator.getUserMedia error: ', error);
-            // });
+            })
+            .catch(error => {
+                console.warn('navigator.getUserMedia error: ', error);
+            });
 
     },
     template: `
