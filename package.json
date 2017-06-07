@@ -16,6 +16,7 @@
   "bugs": {
     "url": "https://github.com/k1slim/papper-scnr/issues"
   },
+  "postinstall": "webpack -p --config ./front-end/webpack/prod.config.js --progress",
   "homepage": "https://github.com/k1slim/papper-scnr#readme",
   "dependencies": {
     "babel-core": "^6.21.0",
