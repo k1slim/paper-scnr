@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack --progress --display-error-details --config front-end/webpack/common.config.js --watch",
     "prod": "webpack --progress --config front-end/webpack/common.config.js",
-    "postinstall": "webpack -p --config front-end/webpack/common.config.js --progress"
+    "postinstall": "npm run prod"
   },
   "repository": {
     "type": "git",
