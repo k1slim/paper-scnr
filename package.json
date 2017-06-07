@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --progress --display-error-details --config front-end/webpack/common.config.js --watch",
-    "prod": "webpack --progress --config front-end/webpack/common.config.js"
+    "prod": "webpack --progress --config front-end/webpack/common.config.js",
+    "postinstall": "webpack -p --config ./front-end/webpack/prod.config.js --progress"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,6 @@
   "bugs": {
     "url": "https://github.com/k1slim/papper-scnr/issues"
   },
-  "postinstall": "webpack -p --config ./front-end/webpack/prod.config.js --progress",
   "homepage": "https://github.com/k1slim/papper-scnr#readme",
   "dependencies": {
     "babel-core": "^6.21.0",
